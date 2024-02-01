@@ -1,0 +1,40 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/bionic64"
+    config.vm.network "forwarded_port", guest: 80, host: 8080
+  
+    config.vm.provider "virtualbox" do |vb|
+      vb.name = 'vm-tp9'
+      vb.memory = "2048"
+      vb.cpus = 2
+    end
+  
+    config.vm.provision "shell", inline: <<-SHELL
+      # Actualizamos los paquetes
+      sudo apt-get update -y
+      sudo apt-get upgrade -y
+  
+      # Instalamos Docker
+      sudo apt-get install -y docker.io
+      sudo usermod -aG docker vagrant
+  
+      # Instalamos kubectl
+      sudo snap install kubectl --classic
+  
+      # Instalamos Minikube
+      curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+      sudo dpkg -i minikube_latest_amd64.deb
+      sudo apt-get install -f
+  
+      # Instalamos Helm
+      sudo snap install helm --classic
+  
+      # Configuramos Minikube
+      minikube config set vm-driver none
+      minikube start
+
+    SHELL
+  end
+  

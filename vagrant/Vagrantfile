@@ -7,8 +7,8 @@ Vagrant.configure("2") do |config|
   
     config.vm.provider "virtualbox" do |vb|
       vb.name = 'vm-tp9'
-      vb.memory = "2048"
-      vb.cpus = 2
+      vb.memory = "4096"
+      vb.cpus = 4
     end
   
     config.vm.provision "shell", inline: <<-SHELL
@@ -31,6 +31,9 @@ Vagrant.configure("2") do |config|
       #Instalar snap
       sudo apt-get update
       sudo apt-get install snapd      
+
+    # Configuramos Minikube
+    minikube config set vm-driver none
 
       # Instalamos Helm
       sudo snap install helm --classic

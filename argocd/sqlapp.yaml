@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: desafio9
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: deployment
+    repoURL: 'https://github.com/monicaafg/proyecto9-mysql.git'
+    targetRevision: HEAD
+  sources: []
+  project: default

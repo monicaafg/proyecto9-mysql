@@ -21,22 +21,22 @@ spec:
            - name: MYSQL_ROOT_PASSWORD
              valueFrom:
                secretKeyRef:
-                 name: sm-mysql-secret
+                 name: sm-mysql-sealed-secret
                  key: sm-mysql-root-pass
            - name: MYSQL_USER
              valueFrom:
                secretKeyRef:
-                 name: sm-mysql-secret
+                 name: sm-mysql-sealed-secret
                  key: sm-mysql-smuser
            - name: MYSQL_PASSWORD
              valueFrom:
                secretKeyRef:
-                 name: sm-mysql-secret
+                 name: sm-mysql-sealed-secret
                  key: sm-mysql-smpass
            - name: MYSQL_DATABASE
              valueFrom:
                secretKeyRef:
-                 name: sm-mysql-secret
+                 name: sm-mysql-sealed-secret
                  key: sm-mysql-db
            ports:
            - containerPort: 3306
